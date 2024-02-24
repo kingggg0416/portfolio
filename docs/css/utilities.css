@@ -154,15 +154,6 @@ h2::selection {
   background: url(../assets/project/project-four.png) center center/cover;
 }
 
-/* Project 5 */
-.card:nth-child(5) {
-  background: url(../assets/project/project-five.png) center center/cover;
-}
-
-/* Project 6 */
-.card:nth-child(6) {
-  background: url(../assets/project/project-six.png) center center/cover;
-}
 
 /* Media Queries */
 @media (max-width: 768px) {
