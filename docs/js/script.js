@@ -59,64 +59,65 @@ if (currentTheme) {
   }
 }
 
-//Adding date - with null check
-let myDate = document.querySelector("#datee");
-if (myDate) {  // Add null check
-    const yes = new Date().getFullYear();
-    myDate.innerHTML = yes;
-}
-
-// Typewriter effect
-const typedTextSpan = document.querySelector(".typed-text");
-const cursor = document.querySelector(".cursor");
-
-// Words with their corresponding colors
-const wordData = [
-    { text: "economics.", color: "#2ecc71" },   // Green for money/growth
-    { text: "technology.", color: "#3498db" },  // Blue for technology/innovation
-    { text: "AI.", color: "#9b59b6" },          // Purple for AI/future
-    { text: "entrepreneurship.", color: "#8B4513" }  // Saddle Brown for stability/foundation
-];
-
-let wordIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-
-function type() {
-    const currentWord = wordData[wordIndex];
-    
-    if (isDeleting) {
-        typedTextSpan.textContent = currentWord.text.substring(0, charIndex - 1);
-        charIndex--;
-    } else {
-        typedTextSpan.textContent = currentWord.text.substring(0, charIndex + 1);
-        charIndex++;
-    }
-
-    // Update color
-    typedTextSpan.style.color = currentWord.color;
-    cursor.style.backgroundColor = currentWord.color;
-
-    cursor.classList.add('typing');
-
-    let typeSpeed = isDeleting ? 100 : 200;
-
-    if (!isDeleting && charIndex === currentWord.text.length) {
-        cursor.classList.remove('typing');
-        typeSpeed = 2000; // Pause at end of word
-        isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % wordData.length;
-        typeSpeed = 500; // Pause before typing next word
-    }
-
-    setTimeout(type, typeSpeed);
-}
-
-// Start the animation when the page loads
+// Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    if(typedTextSpan) {
+    // Date functionality
+    let myDate = document.querySelector("#datee");
+    if (myDate) {
+        const yes = new Date().getFullYear();
+        myDate.innerHTML = yes;
+    }
+
+    // Typewriter effect
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursor = document.querySelector(".cursor");
+
+    if (typedTextSpan && cursor) {  // Only run typewriter if elements exist
+        // Words with their corresponding colors
+        const wordData = [
+            { text: "economics.", color: "#2ecc71" },   // Green for money/growth
+            { text: "technology.", color: "#3498db" },  // Blue for technology/innovation
+            { text: "AI.", color: "#9b59b6" },          // Purple for AI/future
+            { text: "entrepreneurship.", color: "#8B4513" }  // Saddle Brown for stability/foundation
+        ];
+
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentWord = wordData[wordIndex];
+            
+            if (isDeleting) {
+                typedTextSpan.textContent = currentWord.text.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typedTextSpan.textContent = currentWord.text.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            // Update color
+            typedTextSpan.style.color = currentWord.color;
+            cursor.style.backgroundColor = currentWord.color;
+
+            cursor.classList.add('typing');
+
+            let typeSpeed = isDeleting ? 100 : 200;
+
+            if (!isDeleting && charIndex === currentWord.text.length) {
+                cursor.classList.remove('typing');
+                typeSpeed = 2000; // Pause at end of word
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % wordData.length;
+                typeSpeed = 500; // Pause before typing next word
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        // Start the animation with a slight delay
         setTimeout(type, 1000);
     }
 });
