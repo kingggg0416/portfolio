@@ -95,6 +95,8 @@ h2::selection {
   font-size: 3rem;
   line-height: 1.2;
   transition: 0.2s ease-in-out;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .content-text p {
@@ -187,6 +189,12 @@ h2::selection {
   }
 
   .content-text h2 {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: 380px) {
+    .content-text h2 {
+      font-size: 1.5rem;
+    }
   }
 }
